@@ -77,16 +77,20 @@ def list_users(args):
         print(user)
 
 def register_user_commands(subparsers):
-    add_parser = subparsers.add_parser("add-user")
-    add_parser.add_argument("--name", required=True)
-    add_parser.add_argument("--email", required=True)
-    add_parser.set_defaults(func=add_user)
 
-    find_parser = subparsers.add_parser("find-user")
-    find_parser.add_argument("--id", type=int)
-    find_parser.add_argument("--name")
-    find_parser.add_argument("--email")
-    find_parser.set_defaults(func=find_user)
+    # add-user
+    add_user_parser = subparsers.add_parser('add-user')
+    add_user_parser.add_argument('--name', type=str, required=True, help='Name of user')
+    add_user_parser.add_argument('--email', type=str, required=True, help='Email of user')
+    add_user_parser.set_defaults(func=add_user)
 
-    list_parser = subparsers.add_parser("list-users")
-    list_parser.set_defaults(func=list_users)
+    # find-user
+    find_user_parser = subparsers.add_parser('find-user')
+    find_user_parser.add_argument('--id', type=int, help='ID of user')
+    find_user_parser.add_argument('--name', type=str, help='Name of user')
+    find_user_parser.add_argument('--email', type=str, help='Email of user')
+    find_user_parser.set_defaults(func=find_user)
+
+    # list-users
+    list_users_parser = subparsers.add_parser('list-users')
+    list_users_parser.set_defaults(func=list_users)
