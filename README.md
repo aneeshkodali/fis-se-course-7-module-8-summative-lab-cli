@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 All commands are run through `main.py`
 
-## Users
+### Users
 
 **Add a user**
 ```sh
@@ -94,6 +94,23 @@ Can combine attributes on which to perform search
 python main.py find-user --name "Bob Smith" --email "anne.johnson@google.com"
 ```
 --> Will return 2 users
+
+### Projects
+
+**Add a project**
+```sh
+python main.py add-project --owner-id 1 --title "PM CLI" --description "Project management CLI tool" --due-date "2026-02-20"
+```
+
+**List all projects**:
+```sh
+python main.py list-projects
+```
+
+**List all projects for an owner**:
+```sh
+python main.py list-owner-projects --owner-id 1
+```
 
 ### Data persistance
 

@@ -5,7 +5,6 @@ class User:
         self.id = id
         self.name = name
         self.email = email
-        self.projects = [] # initialize empty project list
 
     # convert from class to dict (instance)
     def to_dict(self):

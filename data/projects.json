@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "owner_id": 1,
+        "title": "PM CLI",
+        "description": "Project management CLI tool",
+        "due_date": "2026-02-20"
+    },
+    {
+        "id": 2,
+        "owner_id": 2,
+        "title": "Python OOP",
+        "description": "Python object oriented programming project",
+        "due_date": "2026-02-20"
+    }
+]
