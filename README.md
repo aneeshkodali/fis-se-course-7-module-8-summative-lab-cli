@@ -20,3 +20,86 @@ The following file/folder structure is:
 - [`data/`](./data/): contains local JSON or CSV file storage
 - [`utils/`](./utils/): contains helper functions, custom hooks
 - [`requirements.txt`](./requirements.txt): contains external dependencies
+- [`tests/`](./tests/): contains data and logic tests
+
+## Project Use
+
+To use this repository:
+
+### Installation
+
+Clone the repository:
+```sh
+git clone https://github.com/aneeshkodali/fis-se-course-7-module-8-summative-lab-cli.git
+```
+
+Make sure you are in the repository folder:
+```sh
+cd fis-se-course-7-module-8-summative-lab-cli
+```
+
+Create virtual environment:
+```sh
+python -m venv venv
+```
+
+Activate virtual environment (for Windows):
+```sh
+source venv/Scripts/activate
+```
+
+Install dependencies:
+```sh
+pip install -r requirements.txt
+```
+
+### Running the CLI
+
+All commands are run through `main.py`
+
+## Users
+
+**Add a user**
+```sh
+python main.py add-user --name "Bob Smith" --email "bob.smith@aol.com"
+```
+
+**List all users**:
+```sh
+python main.py list-users
+```
+
+**Find a user**:
+
+By ID:
+```sh
+python main.py find-user --id 1
+```
+
+By Name:
+```sh
+python main.py find-user --name "Bob Smith"
+```
+
+By Email:
+```sh
+python main.py find-user --email "bob.smith@aol.com"
+```
+
+Can combine attributes on which to perform search
+- Pass multiple args/values to the CLI command
+- Returns results if user is matched to ANY criteria
+
+```sh
+python main.py find-user --name "Bob Smith" --email "anne.johnson@google.com"
+```
+--> Will return 2 users
+
+### Data persistance
+
+Data is stored locally within the `data/` folder.
+
+The application automatically:
+- Created IDs incrementally
+- Prevents duplicate data
+- Loads and saves data between runs
