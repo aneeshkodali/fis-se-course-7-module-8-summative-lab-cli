@@ -1,3 +1,6 @@
+# imports
+from datetime import datetime
+
 class Project:
     
     # init
@@ -46,3 +49,21 @@ class Project:
             print(f"{value} is not a valid value for owner_id")
             raise ValueError
         self._owner_id = value
+
+    # due_date getter
+    @property
+    def due_date(self):
+        return self._due_date
+    
+    # due_date setter
+    @due_date.setter
+    def due_date(self, value):
+
+        # convert value to valid date and format
+        value_date = datetime.strptime(value, '%Y-%m-%d').date()
+
+        # check for valid value
+        if not value_date:
+            print(f"Error converting `{value}` to valid date format.")
+            raise ValueError
+        self._due_date = value_date
