@@ -12,5 +12,12 @@
         "title": "Python OOP",
         "description": "Python object oriented programming project",
         "due_date": "2026-02-20"
+    },
+    {
+        "id": 3,
+        "owner_id": 2,
+        "title": "Music Class",
+        "description": "Organize Song, Artist, Album into python classes",
+        "due_date": "2026-05-26"
     }
 ]

@@ -30,7 +30,7 @@ class User:
     # id getter
     @property
     def id(self):
-        return self.id
+        return self._id
     
     # id setter
     @id.setter

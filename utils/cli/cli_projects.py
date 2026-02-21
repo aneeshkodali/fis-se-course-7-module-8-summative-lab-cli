@@ -71,7 +71,7 @@ def list_owner_projects(args):
     ]
 
     if not owner_projects:
-        print(f"Now projects found for owner ID: {args.owner_id}.")
+        print(f"No projects found for owner ID: {args.owner_id}.")
         return
     
     for project in owner_projects:
