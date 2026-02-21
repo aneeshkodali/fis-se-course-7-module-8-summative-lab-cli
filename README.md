@@ -112,6 +112,28 @@ python main.py list-projects
 python main.py list-owner-projects --owner-id 1
 ```
 
+### Task
+
+**Add a task**:
+```sh
+python main.py add-task --project-id 1 --assigned-to-id 1 --title "Create classes"
+```
+
+**Update a task status**:
+```sh
+python main.py update-task-status --id 1 --status "Completed"
+```
+
+**List tasks for a project**:
+```sh
+python main.py list-project-tasks --project-id 1
+```
+
+**List tasks for a user**:
+```sh
+python main.py list-assigned-tasks --assigned-to-id 1
+```
+
 ### Data persistance
 
 Data is stored locally within the `data/` folder.
