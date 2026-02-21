@@ -84,3 +84,22 @@ def test_status_update():
     task.status = "In Progress"
 
     assert task.status == "In Progress"
+
+def test_invalid_id():
+    with pytest.raises(ValueError):
+        Task(0, 1, 1, "Title")
+
+
+def test_invalid_project_id():
+    with pytest.raises(ValueError):
+        Task(1, 0, 1, "Title")
+
+
+def test_invalid_assigned_to_id():
+    with pytest.raises(ValueError):
+        Task(1, 1, 0, "Title")
+
+
+def test_invalid_title():
+    with pytest.raises(ValueError):
+        Task(1, 1, 1, "")

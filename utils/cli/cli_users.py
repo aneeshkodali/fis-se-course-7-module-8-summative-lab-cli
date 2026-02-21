@@ -1,8 +1,10 @@
 from models.user import User
+from rich.console import Console
 from utils.storage import load_data, save_data
 from utils.common import generate_next_id
 
 USER_FILE = "data/users.json"
+console = Console()
 
 def add_user(args):
 
@@ -16,7 +18,7 @@ def add_user(args):
     # prevent user from being added if email already exists
     for user in users:
         if user.email == args.email:
-            print(f"User with email `{user.email}` already exists.")
+            console.print(f"User with email `{user.email}` already exists.")
             return
 
     # create new user  
@@ -33,9 +35,14 @@ def add_user(args):
         data=[user.to_dict() for user in users]
     )
 
-    print(f"User added: {new_user}")
+    console.print(f"User added: {new_user}")
 
 def find_user(args):
+
+    # end if no filter entered
+    if not any([args.id, args.name, args.email]):
+        console.print("Please provide at least one search criteria.")
+        return
 
     # load data
     data = load_data(file_path=USER_FILE)
@@ -46,19 +53,19 @@ def find_user(args):
         user
         for user in users
         if (
-            (args.id and user.id == args.id) or
-            (args.name and user.name == args.name) or
-            (args.email and user.email == args.email)
+            (args.id is not None and user.id == args.id) or
+            (args.name is not None and user.name == args.name) or
+            (args.email is not None and user.email == args.email)
         )
     ]
 
     if not users_filtered:
-        print(f"No users found.")
+        console.print(f"No users found.")
         return
     
-    print("Users found.")
+    console.print("Users found.")
     for user in users_filtered:
-        print(user)
+        console.print(user)
         
 def list_users(args):
 
@@ -70,11 +77,11 @@ def list_users(args):
     ]
 
     if not users:
-        print("No users found.")
+        console.print("No users found.")
         return
 
     for user in users:
-        print(user)
+        console.print(user)
 
 def register_user_commands(subparsers):
 

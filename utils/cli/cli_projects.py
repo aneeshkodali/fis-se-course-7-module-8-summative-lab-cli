@@ -1,10 +1,12 @@
 from models.project import Project
 from models.user import User
+from rich.console import Console
 from utils.storage import load_data, save_data
 from utils.common import generate_next_id
 
 PROJECT_FILE = 'data/projects.json'
 USER_FILE = 'data/users.json'
+console = Console()
 
 def add_project(args):
 
@@ -20,8 +22,8 @@ def add_project(args):
         if user.id == args.owner_id
     ]
     if not user_exists:
-        print(f"User with ID {args.owner_id} not found.")
-        print(f"Project cannot be added.")
+        console.print(f"User with ID {args.owner_id} not found.")
+        console.print(f"Project cannot be added.")
         return
     
     # create new project
@@ -36,7 +38,7 @@ def add_project(args):
     # add project
     project_data.append(new_project.to_dict())
     save_data(file_path=PROJECT_FILE, data=project_data)
-    print(f"Project added: {new_project}")
+    console.print(f"Project added: {new_project}")
 
 def list_projects(args):
 
@@ -48,11 +50,11 @@ def list_projects(args):
     ]
 
     if not projects:
-        print("No projects found.")
+        console.print("No projects found.")
         return
 
     for project in projects:
-        print(project)
+        console.print(project)
 
 def list_owner_projects(args):
 
@@ -71,11 +73,11 @@ def list_owner_projects(args):
     ]
 
     if not owner_projects:
-        print(f"No projects found for owner ID: {args.owner_id}.")
+        console.print(f"No projects found for owner ID: {args.owner_id}.")
         return
     
     for project in owner_projects:
-        print(project)
+        console.print(project)
 
 def register_project_commands(subparsers):
 

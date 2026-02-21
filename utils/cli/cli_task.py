@@ -1,12 +1,14 @@
 from models.project import Project
 from models.task import Task
 from models.user import User
+from rich.console import Console
 from utils.storage import load_data, save_data
 from utils.common import generate_next_id
 
 PROJECT_FILE = 'data/projects.json'
 TASK_FILE = 'data/tasks.json'
 USER_FILE = 'data/users.json'
+console = Console()
 
 def add_task(args):
 
@@ -18,25 +20,17 @@ def add_task(args):
     task_data = load_data(file_path=TASK_FILE)
 
     # make sure user exists
-    user_exists = [
-        user
-        for user in users
-        if user.id == args.assigned_to_id
-    ]
+    user_exists = any(user.id == args.assigned_to_id for user in users)
     if not user_exists:
-        print(f"User with ID {args.assigned_to_id} not found.")
-        print(f"Task cannot be added.")
+        console.print(f"User with ID {args.assigned_to_id} not found.")
+        console.print(f"Task cannot be added.")
         return
     
     # make sure project exists
-    project_exists = [
-        project
-        for project in projects
-        if project.id == args.project_id
-    ]
+    project_exists = any(project.id == args.project_id for project in projects)
     if not project_exists:
-        print(f"Project with ID {args.project_id} not found.")
-        print(f"Task cannot be added.")
+        console.print(f"Project with ID {args.project_id} not found.")
+        console.print(f"Task cannot be added.")
         return
     
     # create new task
@@ -51,7 +45,7 @@ def add_task(args):
     # add task
     task_data.append(new_task.to_dict())
     save_data(file_path=TASK_FILE, data=task_data)
-    print(f"Task added: {new_task}")
+    console.print(f"Task added: {new_task}")
 
 def list_project_tasks(args):
 
@@ -70,11 +64,11 @@ def list_project_tasks(args):
     ]
 
     if not project_tasks:
-        print(f"No tasks found for project ID: {args.project_id}.")
+        console.print(f"No tasks found for project ID: {args.project_id}.")
         return
     
     for project_task in project_tasks:
-        print(project_task)
+        console.print(project_task)
 
 def list_assigned_tasks(args):
 
@@ -93,11 +87,11 @@ def list_assigned_tasks(args):
     ]
 
     if not user_tasks:
-        print(f"No tasks found for user ID: {args.assigned_to_id}.")
+        console.print(f"No tasks found for user ID: {args.assigned_to_id}.")
         return
     
     for user_task in user_tasks:
-        print(user_task)
+        console.print(user_task)
 
 def update_task_status(args):
     
@@ -116,16 +110,16 @@ def update_task_status(args):
                 task.status = args.status
                 task_found = True
             except ValueError as e:
-                print(f"Error when updating task {args.id} status: {e}")
+                console.print(f"Error when updating task {args.id} status: {e}")
             break
     
     # load data back to file
     if task_found:
         new_data = [task.to_dict() for task in tasks]
         save_data(file_path=TASK_FILE, data=new_data)
-        print(f"Task {args.id} updated with status {args.status}.")
+        console.print(f"Task {args.id} updated with status {args.status}.")
     else:
-        print(f"Task with ID {args.id} not found.")
+        console.print(f"Task with ID {args.id} not found.")
 
 def register_task_commands(subparsers):
 

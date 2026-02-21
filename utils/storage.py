@@ -6,7 +6,7 @@ def load_data(file_path: str) -> list:
     Arguments:
     - file_path: File path
 
-    Returns data from list (empty if not found)
+    Returns data from list (empty if error occurs)
     '''
 
     # end early if no file found
@@ -17,18 +17,24 @@ def load_data(file_path: str) -> list:
     with open(file_path, "r") as file:
         try:
             return json.load(file)
-        except Exception as e:
-            print(f"Error when retrieving file data: {e}")
+        except (json.JSONDecodeError, OSError):
             return []
 
 def save_data(
-    file_path=str, 
-    data=list
-):
+    file_path: str, 
+    data: list
+) -> None:
     '''
     Arguments:
     - file_path: File path
     - data: Data to write to file path
     '''
-    with open(file_path, "w") as file:
-        json.dump(data, file, indent=4)
+    # create directory if not exists
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # write data
+    try:
+        with open(file_path, "w") as file:
+            json.dump(data, file, indent=4)
+    except OSError as e:
+        raise OSError(f"Error writing to file: {e}")

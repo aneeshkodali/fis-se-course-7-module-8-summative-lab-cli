@@ -1,6 +1,3 @@
-# imports
-from datetime import datetime
-
 class Project:
     
     # init
@@ -34,8 +31,21 @@ class Project:
 
     # representation function
     def __repr__(self):
-        return f"Project(id={self.id}, owner_id={self.owner_id}, title={self.title}, description={self.description}, due_date={self.due_date})"
+        return f"Project(id={self.id}, owner_id={self.owner_id}, title='{self.title}', description='{self.description}', due_date='{self.due_date}')"
     
+    # id getter
+    @property
+    def id(self):
+        return self._id
+    
+    # id setter
+    @id.setter
+    def id(self, value):
+        # check for valid values
+        if not isinstance(value, int) or value < 1:
+            raise ValueError(f"{value} is not a valid value for id")
+        self._id = value
+
     # owner_id getter
     @property
     def owner_id(self):
@@ -46,6 +56,48 @@ class Project:
     def owner_id(self, value):
         # check for valid values
         if not isinstance(value, int) or value < 1:
-            print(f"{value} is not a valid value for owner_id")
-            raise ValueError
+            raise ValueError(f"{value} is not a valid value for owner_id")
         self._owner_id = value
+
+    # title getter
+    @property
+    def title(self):
+        return self._title
+
+    # title stter
+    @title.setter
+    def title(self, value):
+        # check for valid value
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{value} is not a valid title")
+        self._title = value
+
+    # description getter
+    @property
+    def description(self):
+        return self._description
+
+    # description stter
+    @description.setter
+    def description(self, value):
+        # check for valid value
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{value} is not a valid description")
+        self._description = value
+    
+    # due_date getter
+    @property
+    def due_date(self):
+        return self._due_date
+    
+
+    # due_date stter
+    @due_date.setter
+    def due_date(self, value):
+        # check for valid value
+        if value is None:
+            self._due_date = None
+        elif not isinstance(value, str):
+            raise ValueError(f"{value} is not a valid due_date")
+        else:
+            self._due_date = value
