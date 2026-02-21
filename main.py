@@ -1,5 +1,6 @@
 # imports
 from utils.cli.cli_projects import register_project_commands
+from utils.cli.cli_task import register_task_commands
 from utils.cli.cli_users import register_user_commands
 import argparse
 
@@ -15,6 +16,7 @@ def main():
 
     # register commands
     register_project_commands(subparsers=subparsers)
+    register_task_commands(subparsers=subparsers)
     register_user_commands(subparsers=subparsers)
 
 

@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "project_id": 1,
+        "assigned_to_id": 1,
+        "title": "Create classes",
+        "status": "Completed"
+    },
+    {
+        "id": 2,
+        "project_id": 1,
+        "assigned_to_id": 2,
+        "title": "Create CLI commands",
+        "status": "In Progress"
+    },
+    {
+        "id": 3,
+        "project_id": 1,
+        "assigned_to_id": 3,
+        "title": "Register CLI commands",
+        "status": "Not Started"
+    }
+]

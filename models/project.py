@@ -1,3 +1,6 @@
+# imports
+from datetime import datetime
+
 class Project:
     
     # init
@@ -32,3 +35,17 @@ class Project:
     # representation function
     def __repr__(self):
         return f"Project(id={self.id}, owner_id={self.owner_id}, title={self.title}, description={self.description}, due_date={self.due_date})"
+    
+    # owner_id getter
+    @property
+    def owner_id(self):
+        return self._owner_id
+    
+    # owner_id setter
+    @owner_id.setter
+    def owner_id(self, value):
+        # check for valid values
+        if not isinstance(value, int) or value < 1:
+            print(f"{value} is not a valid value for owner_id")
+            raise ValueError
+        self._owner_id = value
